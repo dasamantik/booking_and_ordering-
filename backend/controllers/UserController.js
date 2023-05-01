@@ -71,10 +71,14 @@ export const login = async (reg, res) => {
         expiresIn: "30d",
       }
     );
-
-    res.json({
-      message: "OK",
-    });
+    res
+      .cookie("access_token", token, {
+        httpOnly: true,
+      })
+      .status(200)
+      .json({
+        message: "OK",
+      });
   } catch (err) {
     res.status(500).json({
       message: "Не вдалося увійти",
