@@ -21,29 +21,15 @@ const restaurantSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  menu: [
-    {
-      name: {
-        type: String,
-        required: true,
-      },
-      price: {
-        type: Number,
-        required: true,
-      },
-      description: {
-        type: String,
-        required: true,
-      },
-      photo: {
-        type: String,
-        required: true,
-      },
-    },
-  ],
   rating: {
     type: Number,
     required: true,
+  },
+  photos: {
+    type: [String],
+  },
+  tables: {
+    type: [String],
   },
   reviews: [
     {
