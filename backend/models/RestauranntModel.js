@@ -31,6 +31,9 @@ const restaurantSchema = new mongoose.Schema({
   tables: {
     type: [String],
   },
+  dishes: {
+    type: [String],
+  },
   reviews: [
     {
       user: {
