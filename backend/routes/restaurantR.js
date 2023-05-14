@@ -16,3 +16,5 @@ router.delete(
 router.patch("/update/:id", verifyAdmin, restaurantController.updateRestaurant);
 //create restaurant
 router.post("/new", verifyAdmin, restaurantController.createRestaurant);
+
+export default router;

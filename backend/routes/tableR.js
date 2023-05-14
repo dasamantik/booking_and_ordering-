@@ -4,7 +4,7 @@ import { verifyAdmin } from "../middleware/jwtVerify.js";
 
 const router = express.Router();
 //CREATE
-router.post("/:restaurantid", verifyAdmin, tableController.createTable);
+router.post("/:id", verifyAdmin, tableController.createTable);
 
 //UPDATE
 router.put("/availability/:id", tableController.updateTableAvailability);

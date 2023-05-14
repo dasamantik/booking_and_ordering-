@@ -2,14 +2,14 @@ import Dish from "../models/DishModel.js";
 import Restauran from "../models/RestauranntModel.js";
 
 export const createDish = async (req, res, next) => {
-  const restauranId = req.params.restauranid;
+  const restauranId = req.params.id;
   const newDish = new Dish(req.body);
 
   try {
     const savedDish = await newDish.save();
     try {
       await Restauran.findByIdAndUpdate(restauranId, {
-        $push: { Dishs: savedDish._id },
+        $push: { dishes: savedDish._id },
       });
     } catch (err) {
       next(err);

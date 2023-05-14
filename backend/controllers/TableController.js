@@ -2,14 +2,14 @@ import Table from "../models/TableModel.js";
 import Restauran from "../models/RestauranntModel.js";
 
 export const createTable = async (req, res, next) => {
-  const restauranId = req.params.restauranid;
+  const restauranId = req.params.id;
   const newTable = new Table(req.body);
 
   try {
     const savedTable = await newTable.save();
     try {
       await Restauran.findByIdAndUpdate(restauranId, {
-        $push: { Tables: savedTable._id },
+        $push: { tables: savedTable._id },
       });
     } catch (err) {
       next(err);
