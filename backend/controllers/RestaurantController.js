@@ -31,9 +31,11 @@ export const deleteRestaurant = async (reg, res) => {
 
 export const getRestaurant = async (reg, res) => {
   try {
-    const restaurant = await Restaurant.findOne(reg.params.id);
-    return res.status(200).json(restaurant);
-  } catch {}
+    const restaurant = await Restaurant.findById(reg.params.id);
+    res.json(restaurant);
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export const getRestaurants = async (reg, res) => {
