@@ -13,8 +13,4 @@ router.patch("/update/:id", verifyAdmin, dishController.updateDish);
 
 router.post("/:id", verifyAdmin, dishController.createDish);
 
-router.post("/order",verifyUser,dishController.makeOrder);
-
-router.get("/orders", verifyAdmin,dishController.getOrders);
-
 export default router;

@@ -4,7 +4,9 @@ import userRoute from "./routes/userR.js";
 import restaurantRoute from "./routes/restaurantR.js";
 import tableRouter from "./routes/tableR.js";
 import dishRouter from "./routes/dishR.js";
+import orderRouter from "./routes/orderR.js"
 import cookieParser from "cookie-parser";
+
 await mongoose
   .connect("mongodb+srv://dasamant:12345@cluster0.e3buqvm.mongodb.net/test")
   .then(() => console.log("DB coneccted"))
@@ -43,6 +45,7 @@ app.use("/auth", userRoute);
 app.use("/restaurant", restaurantRoute);
 app.use("/table", tableRouter);
 app.use("/dish", dishRouter);
+app.use("/order", orderRouter);
 
 app.listen(PORT, () => {
   console.log(`server runing on PORT ${PORT}`);

@@ -79,8 +79,11 @@ export const makeOrder =  async (req, res, next) => {
 
 export const getOrders = async (req,res,next) =>{
   try {
-    const orders = await Order.find().populate('user');
-    res.status(200).json(saveOrder);
+    const orders = await Order.find().populate('user') .populate({
+      path: 'dishes.dish_id',
+      model: 'Dish'
+    }).exec();
+    res.status(200).json(orders);
   } catch (err) {
     next(err);
   }
