@@ -1,6 +1,6 @@
 import express from "express";
 import * as dishController from "../controllers/DishController.js";
-import { verifyAdmin, verifyUser } from "../middleware/jwtVerify.js";
+import { verifyAdmin } from "../middleware/jwtVerify.js";
 const router = express.Router();
 
 router.get("/:id", dishController.getDish);
