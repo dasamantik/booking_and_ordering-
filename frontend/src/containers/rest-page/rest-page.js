@@ -22,9 +22,8 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { useLocation } from 'react-router-dom';
 import queryString from 'query-string';
+
 import './rest-page.sass';
-import Cookies from 'js-cookie';
-import { decodeToken } from 'react-jwt';
 
 function RestPage({ tableDate }) {
   const { id } = useParams();
@@ -98,40 +97,22 @@ function RestPage({ tableDate }) {
   };
 
   const uniqueCategories = [...new Set(dishes.map((dish) => dish.category))];
-  
-  const handleOrder = () => {
-    const token = Cookies.get('access_token');
-    const userId = decodeToken(token);
-    console.log(token);
-    console.log(userId);
-    const user = userId;  // Замените на фактический id пользователя
 
-    // Получение текущей даты
+  const handleOrder = () => {
+    const user = '645fee2c71912c47e8fffdfd'; 
     const currentDate = new Date();
     const year = currentDate.getFullYear();
     const month = String(currentDate.getMonth() + 1).padStart(2, '0');
     const day = String(currentDate.getDate()).padStart(2, '0');
     const formattedDate = `${year}-${month}-${day}`;
-
-        const order = {
-          user: user,
-          dishes: dishes.filter((dish) => dish.count >= 1).map((dish) => ({ id: dish.id, count: dish.count })),
-          total_price,
-          data: tableDate || currentDate, // Используем переданную дату, если она есть, иначе используем текущую дату
-        };
-        console.log(order);
-         // Получите токен из куки
-
-        axios.post(`http://localhost:3002/order/one`, order, {
-          headers: {
-            Authorization: `${token}`,
-          }})
-      .then(response => {
-        console.log(response.data); // Обработка ответа от сервера
-      })
-      .catch(error => {
-        console.error(error); // Обработка ошибок при отправке запроса
-      });
+    const order = {
+      user,
+      dishes: dishes.filter((dish) => dish.count >= 1).map((dish) => ({ id: dish.id, count: dish.count })),
+      total_price,
+      data: tableDate || currentDate, 
+    };
+    console.log(order);
+   
   };
 
   const handleCountChange = (dishId, dishCount) => {
@@ -149,7 +130,7 @@ function RestPage({ tableDate }) {
     const total_price = dishes.reduce((total, dish) => {
       return total + dish.price * dish.count;
     }, 0);
-    setTotalPrice(total_price.toFixed(2));
+    setTotalPrice(total_price);
   }, [dishes]);
 
   const [selectedTableNumber, setSelectedTableNumber] = useState('');
@@ -172,10 +153,12 @@ function RestPage({ tableDate }) {
       const selectedTableId = selectedTableNumberObj ? selectedTableNumberObj.id : null;
       console.log("Selected table:", selectedTableData);
       console.log("Table ID:", selectedTableId);
-      setSelectedTable(selectedTableNumberObj); // Update the state with the selected table data
-      // Perform the reservation logic here
+      setSelectedTable(selectedTableNumberObj); 
     }
   };
+  
+  
+  
   
 
   return (

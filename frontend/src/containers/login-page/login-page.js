@@ -3,36 +3,35 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import './login-page.sass';
 import Header from '../../components/header/header';
-import { Link, useNavigate } from 'react-router-dom';
 
 const LoginRegisterSwitch = () => {
-  const [isLoginForm, setisLoginForm] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
   const toggleForm = () => {
-    setisLoginForm(!isLoginForm);
+    setIsLogin(!isLogin);
   };
 
   return (
     <>
-      <Header page="login" setisLoginForm={setisLoginForm} />
+      <Header page="login" setIsLogin={setIsLogin} />
 
       <div className="login-register-switch">
         <div className="login-register-switch__wrapper">
           <div className="login-register-switch-button__wrapper">
             <button
-              className={`login-register-switch-button__item ${isLoginForm ? 'active' : ''}`}
+              className={`login-register-switch-button__item ${isLogin ? 'active' : ''}`}
               onClick={toggleForm}
             >
               Реєстрація
             </button>
             <button
-              className={`login-register-switch-button__item ${isLoginForm ? '' : 'active'}`}
+              className={`login-register-switch-button__item ${isLogin ? '' : 'active'}`}
               onClick={toggleForm}
             >
               Вхід
             </button>
           </div>
 
-          {isLoginForm ? <LoginForm /> : <RegisterForm />}
+          {isLogin ? <LoginForm /> : <RegisterForm />}
         </div>
       </div>
     </>
@@ -40,26 +39,25 @@ const LoginRegisterSwitch = () => {
 };
 
 const LoginForm = () => {
-  const navigate = useNavigate();
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     const { email, password } = event.target.elements;
-    
+
     try {
       const response = await axios.post('http://localhost:3002/auth/login', {
         email: email.value,
         password: password.value,
       });
 
-      // Read cookies using js-cookie
-    //   const { token } = response.data; // Получите токен из ответа сервера
+      const data = response.data;
+      console.log(data);
 
-    // // // Установите токен в куки с помощью js-cookie
-    //   Cookies.set('access_token', token, { expires: 1 });
+      
+      const token = Cookies.get('token');
+      console.log(token);
 
       event.target.reset();
-      navigate('/');
     } catch (error) {
       console.error(error);
     }
@@ -97,6 +95,11 @@ const RegisterForm = () => {
 
       const data = response.data;
       console.log(data);
+
+      // Read cookies using js-cookie
+      const token = Cookies.get('token');
+      console.log(token);
+
       event.target.reset();
     } catch (error) {
       console.error(error);
