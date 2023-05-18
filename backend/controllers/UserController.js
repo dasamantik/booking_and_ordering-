@@ -86,3 +86,21 @@ export const login = async (reg, res) => {
     console.log(err);
   }
 };
+
+export const logout = (req, res) => {
+  
+  const token = req.headers.authorization || req.query.token || req.body.token;
+
+  if (!token) {
+    return res.status(401).json({ message: "Токен отсутствует" });
+  }
+
+  try {
+   
+    const decodedToken = jwt.verify(token, "secret123");
+
+    res.json({ message: "Логаут успешный" });
+  } catch (err) {
+    res.status(401).json({ message: "Недействительный токен" });
+  }
+};
