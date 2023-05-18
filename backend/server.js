@@ -6,7 +6,7 @@ import tableRouter from "./routes/tableR.js";
 import dishRouter from "./routes/dishR.js";
 import orderRouter from "./routes/orderR.js"
 import cookieParser from "cookie-parser";
-import cors from "cors";
+import cors from 'cors';
 
 await mongoose
   .connect("mongodb+srv://dasamant:12345@cluster0.e3buqvm.mongodb.net/test")
@@ -15,32 +15,20 @@ await mongoose
 
 const app = express();
 const PORT = process.env.PORT || 3002;
-app.use(cors());
+
+app.use(
+  cors({
+    credentials: true,
+    origin: [
+      'http://localhost:3000',
+      'http://localhost:3000/restaurant/',
+      'http://localhost:3000/login',
+    ],
+  })
+);
 app.use(express.json());
 app.use(cookieParser());
-app.use(function (req, res, next) {
-  // Website you wish to allow to connect
-  res.setHeader("Access-Control-Allow-Origin", "*");
 
-  // Request methods you wish to allow
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-  );
-
-  // Request headers you wish to allow
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "Content-Type,append,delete,entries,foreach,get,has,keys,set,values,Authorization,X-Requested-With,content-type"
-  );
-
-  // Set to true if you need the website to include cookies in the requests sent
-  // to the API (e.g. in case you use sessions)
-  res.setHeader("Access-Control-Allow-Credentials", true);
-
-  // Pass to next layer of middleware
-  next();
-});
 
 app.use("/auth", userRoute);
 app.use("/restaurant", restaurantRoute);
