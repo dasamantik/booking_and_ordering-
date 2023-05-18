@@ -52,8 +52,8 @@ export const deleteDish = async (req, res, next) => {
 };
 export const getDish = async (req, res, next) => {
   try {
-    const Dish = await Dish.findById(req.params.id);
-    res.status(200).json(Dish);
+    const dish = await Dish.findById(req.params.id);
+    res.status(200).json(dish);
   } catch (err) {
     next(err);
   }

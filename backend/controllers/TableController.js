@@ -35,10 +35,10 @@ export const updateTable = async (req, res, next) => {
 export const updateTableAvailability = async (req, res, next) => {
   try {
     await Table.updateOne(
-      { "TableNumbers._id": req.params.id },
+      { "tableNumbers._id": req.body.id },
       {
         $push: {
-          "TableNumbers.$.unavailableDates": req.body.dates,
+          "tableNumbers.$.unavailableDates": req.body.dates,
         },
       }
     );
@@ -65,8 +65,8 @@ export const deleteTable = async (req, res, next) => {
 };
 export const getTable = async (req, res, next) => {
   try {
-    const Table = await Table.findById(req.params.id);
-    res.status(200).json(Table);
+    const table = await Table.findById(req.params.id);
+    res.status(200).json(table);
   } catch (err) {
     next(err);
   }

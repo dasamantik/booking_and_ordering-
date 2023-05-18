@@ -7,7 +7,7 @@ const router = express.Router();
 router.post("/:id", verifyAdmin, tableController.createTable);
 
 //UPDATE
-router.put("/availability/:id", verifyUser, tableController.updateTableAvailability);
+router.put("/availability/", verifyUser, tableController.updateTableAvailability);
 router.put("/mod/:id", verifyAdmin, tableController.updateTable);
 //DELETE
 router.delete("/:id/:hotelid", verifyAdmin, tableController.deleteTable);
