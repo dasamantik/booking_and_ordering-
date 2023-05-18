@@ -1,0 +1,17 @@
+.App {
+  grid-area: 1 / 2 / 2 / 3;
+  position: relative;
+}
+.App::before {
+  content: "";
+  background: inherit; 
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0; 
+  bottom: 0;
+  box-shadow: inset 0 0 0 3000px rgba(255,255,255,0.3);
+  backdrop-filter: blur(10px);
+  z-index: -1;
+}
+

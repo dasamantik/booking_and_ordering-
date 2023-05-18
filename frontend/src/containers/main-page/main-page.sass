@@ -1,0 +1,76 @@
+.rest-list__wrapper
+    display: grid
+    grid-template-columns: 30% 70%
+    grid-template-rows: 100%
+    grid-column-gap: 0px
+    grid-row-gap: 0px
+    margin-top: 70px
+    min-height: 80vh
+    padding-top: 5vh
+
+.rest-list__filter
+    grid-area: 1 / 1 / 2 / 2
+    display: flex
+    flex-direction: column
+    gap: 2vh
+    background: rgba(226,230,173,0.85)
+    backdrop-filter: blur(20px)
+    padding: 2vh 2vw
+    width: 60%
+    height: 30vh
+    margin: 3vh auto 3vh
+    border-radius: 15px
+    .rest-list__btn
+        border-radius: 15px
+        border: 0.5px #6b67d0 solid
+        outline-color: #6b67d0
+        padding: 0.5vh 0
+        width: 60%
+        margin: 0 auto
+        cursor: pointer
+.rest-list
+    grid-area: 1 / 2 / 2 / 3
+    nav
+        margin: 0 1vw 0 auto
+        width: 30%
+        ul
+            justify-content: end
+
+//card
+.rest-list__item 
+    display: grid
+    grid-template-columns: 25% 45% 25% 5%
+    grid-template-rows: 25% 55% 20%
+    grid-column-gap: 0px
+    grid-row-gap: 0px
+    height: 25vh
+    background: rgba(255,255,255,0.8)
+    border: 1px solid rgba(187,187,187,1) 
+    border-radius: 5px
+    margin: 1vh 1vw
+
+
+.rest-list__item__img  
+    grid-area: 1 / 1 / 4 / 2 
+    padding: 1vh 1vw 
+    img
+        object-fit: contain
+        width: 100%
+
+.rest-list__item__title 
+    grid-area: 1 / 2 / 2 / 3 
+    font-size: 20px
+    font-weight: 500
+.rest-list__item__rate  
+    grid-area: 1 / 4 / 2 / 5
+    display: flex
+    justify-content: center
+    align-items: center 
+    background-color: rgba(0,31,255,0.5)
+    border-end-start-radius: 4px
+.rest-list__item__descr  
+    grid-area: 2 / 2 / 3 / 4 
+    font-size: 14px
+.rest-list__item__address  
+    grid-area: 3 / 2 / 4 / 3 
+    font-size: 14px
