@@ -6,6 +6,7 @@ import tableRouter from "./routes/tableR.js";
 import dishRouter from "./routes/dishR.js";
 import orderRouter from "./routes/orderR.js"
 import cookieParser from "cookie-parser";
+import cors from "cors";
 
 await mongoose
   .connect("mongodb+srv://dasamant:12345@cluster0.e3buqvm.mongodb.net/test")
@@ -14,7 +15,7 @@ await mongoose
 
 const app = express();
 const PORT = process.env.PORT || 3002;
-
+app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 app.use(function (req, res, next) {
