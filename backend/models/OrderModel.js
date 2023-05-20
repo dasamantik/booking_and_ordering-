@@ -5,7 +5,7 @@ const orderSchema = new mongoose.Schema ({
         type: mongoose.Schema.Types.ObjectId,
         required: true,
     },
-    data:{
+    date:{
        type:Date,
     },
     total_price:Number,

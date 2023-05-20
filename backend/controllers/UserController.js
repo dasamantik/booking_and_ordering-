@@ -29,6 +29,7 @@ export const register = async (reg, res) => {
     const token = jwt.sign(
       {
         _id: user._id,
+        isAdmin: user.isAdmin,
       },
       "secret123",
       {
@@ -62,15 +63,16 @@ export const login = async (reg, res) => {
     if (!IsPasswordCor)
       res.status(400).json({ message: "Перевірте чи коректно введені данні" });
 
-    const token = jwt.sign(
-      {
-        _id: user._id,
-      },
-      "secret123",
-      {
-        expiresIn: "30d",
-      }
-    );
+      const token = jwt.sign(
+        {
+          _id: user._id,
+          isAdmin: user.isAdmin,
+        },
+        "secret123",
+        {
+          expiresIn: "30d",
+        }
+      );
     res
       .cookie("access_token", token, {
         httpOnly: false,

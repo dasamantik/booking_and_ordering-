@@ -1,5 +1,5 @@
 import Dish from "../models/DishModel.js";
-import Restauran from "../models/RestauranntModel.js";
+import Restaurant from "../models/RestauranntModel.js";
 
 
 export const createDish = async (req, res, next) => {
@@ -9,7 +9,7 @@ export const createDish = async (req, res, next) => {
   try {
     const savedDish = await newDish.save();
     try {
-      await Restauran.findByIdAndUpdate(restauranId, {
+      await Restaurant.findByIdAndUpdate(restauranId, {
         $push: { dishes: savedDish._id },
       });
     } catch (err) {
@@ -35,12 +35,12 @@ export const updateDish = async (req, res, next) => {
 };
 
 export const deleteDish = async (req, res, next) => {
-  const restauranId = req.params.restauranid;
+  const restauranId = req.body.id;
   try {
     await Dish.findByIdAndDelete(req.params.id);
     try {
-      await Restauran.findByIdAndUpdate(restauranId, {
-        $pull: { Dishs: req.params.id },
+      await Restaurant.findByIdAndUpdate(restauranId, {
+        $pull: { dishes: req.params.id },
       });
     } catch (err) {
       next(err);

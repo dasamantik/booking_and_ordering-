@@ -23,6 +23,7 @@ app.use(
       'http://localhost:3000',
       'http://localhost:3000/restaurant/',
       'http://localhost:3000/login',
+      'http://localhost:3000/admin'
     ],
   })
 );
