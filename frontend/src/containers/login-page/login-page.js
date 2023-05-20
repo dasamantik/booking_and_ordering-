@@ -3,35 +3,37 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import './login-page.sass';
 import Header from '../../components/header/header';
+import { Link, useNavigate } from 'react-router-dom';
+import { decodeToken } from 'react-jwt';
 
 const LoginRegisterSwitch = () => {
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLoginForm, setisLoginForm] = useState(false);
   const toggleForm = () => {
-    setIsLogin(!isLogin);
+    setisLoginForm(!isLoginForm);
   };
 
   return (
     <>
-      <Header page="login" setIsLogin={setIsLogin} />
+      <Header page="login" setisLoginForm={setisLoginForm} />
 
       <div className="login-register-switch">
         <div className="login-register-switch__wrapper">
           <div className="login-register-switch-button__wrapper">
             <button
-              className={`login-register-switch-button__item ${isLogin ? 'active' : ''}`}
+              className={`login-register-switch-button__item ${isLoginForm ? 'active' : ''}`}
               onClick={toggleForm}
             >
               Реєстрація
             </button>
             <button
-              className={`login-register-switch-button__item ${isLogin ? '' : 'active'}`}
+              className={`login-register-switch-button__item ${isLoginForm ? '' : 'active'}`}
               onClick={toggleForm}
             >
               Вхід
             </button>
           </div>
 
-          {isLogin ? <LoginForm /> : <RegisterForm />}
+          {isLoginForm ? <LoginForm /> : <RegisterForm />}
         </div>
       </div>
     </>
@@ -39,25 +41,27 @@ const LoginRegisterSwitch = () => {
 };
 
 const LoginForm = () => {
+  const navigate = useNavigate();
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     const { email, password } = event.target.elements;
-
+    
     try {
       const response = await axios.post('http://localhost:3002/auth/login', {
         email: email.value,
         password: password.value,
       });
+      decodeToken(Cookies.get('access_token'))?.isAdmin ? navigate('/admin') : navigate('/');
+      // Read cookies using js-cookie
+    //   const { token } = response.data; // Получите токен из ответа сервера
 
-      const data = response.data;
-      console.log(data);
-
-      
-      const token = Cookies.get('token');
-      console.log(token);
+    // // // Установите токен в куки с помощью js-cookie
+    //   Cookies.set('access_token', token, { expires: 1 });
 
       event.target.reset();
+
+      
     } catch (error) {
       console.error(error);
     }
@@ -95,11 +99,6 @@ const RegisterForm = () => {
 
       const data = response.data;
       console.log(data);
-
-      // Read cookies using js-cookie
-      const token = Cookies.get('token');
-      console.log(token);
-
       event.target.reset();
     } catch (error) {
       console.error(error);

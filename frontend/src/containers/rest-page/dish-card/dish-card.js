@@ -27,9 +27,9 @@ function DishCard({ dish, handleCountChange, dishCount }) {
 
   const calculatePrice = () => {
     if (dishCount === 0) {
-      return price;
+      return price.toFixed(2);
     } else {
-      return price * dishCount;
+      return (price * dishCount).toFixed(2);
     }
   };
   return (
