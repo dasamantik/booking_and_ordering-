@@ -1,5 +1,5 @@
 import Table from "../models/TableModel.js";
-import Restauran from "../models/RestauranntModel.js";
+import Restaurant from "../models/RestauranntModel.js";
 
 export const createTable = async (req, res, next) => {
   const restauranId = req.params.id;
@@ -48,11 +48,11 @@ export const updateTableAvailability = async (req, res, next) => {
   }
 };
 export const deleteTable = async (req, res, next) => {
-  const restauranId = req.params.restauranid;
+  const restauranId = req.body.id;
   try {
     await Table.findByIdAndDelete(req.params.id);
     try {
-      await Restauran.findByIdAndUpdate(restauranId, {
+      await Restaurant.findByIdAndUpdate(restauranId, {
         $pull: { Tables: req.params.id },
       });
     } catch (err) {

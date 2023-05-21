@@ -8,7 +8,7 @@ function DishCard({ dish, handleCountChange, dishCount }) {
 
   const formatData = (item) => {
     const { name, quantity, unit } = item;
-    const unitText = unit === 'piece' ? 'p' : 'g';
+    const unitText = unit.substr(0,1);
     return `${name}(${quantity}${unitText})`;
   };
 

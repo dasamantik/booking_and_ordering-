@@ -1,25 +1,29 @@
 import { validationResult } from "express-validator";
 import Restaurant from "../models/RestauranntModel.js";
 
-export const createRestaurant = async (reg, res) => {
+export const createRestaurant = async (reg, res, next) => {
   try {
     const errors = validationResult(reg.body);
     if (!errors.isEmpty()) return res.status(400).json(errors.array());
 
     const newRestaurant = await new Restaurant(reg.body).save();
     return res.status(200).json(newRestaurant);
-  } catch {}
+  } catch(error) {
+    next(error)
+  }
 };
 
-export const updateRestaurant = async (reg, res) => {
+export const updateRestaurant = async (reg, res, next) => {
   try {
-    const updatedRestourant = await Restaurant.findByIdAndUpdate(
+    const updatedRestaurant = await Restaurant.findByIdAndUpdate(
       reg.params.id,
       { $set: reg.body },
       { new: true }
     );
     return res.status(200).json(updatedRestaurant);
-  } catch {}
+  } catch (err) {
+    next(err);
+  }
 };
 
 export const deleteRestaurant = async (reg, res) => {

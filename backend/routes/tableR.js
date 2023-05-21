@@ -7,10 +7,10 @@ const router = express.Router();
 router.post("/:id", verifyAdmin, tableController.createTable);
 
 //UPDATE
-router.put("/availability/", verifyUser, tableController.updateTableAvailability);
-router.put("/mod/:id", verifyAdmin, tableController.updateTable);
+router.patch("/availability/", verifyUser, tableController.updateTableAvailability);
+router.patch("/mod/:id", verifyAdmin, tableController.updateTable);
 //DELETE
-router.delete("/:id/:hotelid", verifyAdmin, tableController.deleteTable);
+router.delete("/:id", verifyAdmin, tableController.deleteTable);
 //GET
 
 router.get("/:id", tableController.getTable);

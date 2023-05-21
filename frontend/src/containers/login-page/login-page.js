@@ -52,7 +52,7 @@ const LoginForm = () => {
         email: email.value,
         password: password.value,
       });
-      decodeToken(Cookies.get('access_token'))?.isAdmin ? navigate('/admin') : navigate('/');
+
       // Read cookies using js-cookie
     //   const { token } = response.data; // Получите токен из ответа сервера
 
@@ -61,7 +61,7 @@ const LoginForm = () => {
 
       event.target.reset();
 
-      
+      decodeToken(Cookies.get('access_token')).isAdmin ? navigate('/admin') : navigate('/');
     } catch (error) {
       console.error(error);
     }
