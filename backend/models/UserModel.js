@@ -26,11 +26,4 @@ const userSchema = new mongoose.Schema({
 });
 
 export default mongoose.model("User", userSchema);
-/*
-{
-"name": "John Doe",
-"phone": "380996331496",
-"email": "johndoe@example.com",
-"password": "password123"
-}
-*/
+

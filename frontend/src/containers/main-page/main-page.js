@@ -31,7 +31,6 @@ function MainPage() {
       const response = await axios.get('http://localhost:3002/restaurant');
       const sortedRestaurants = response.data.sort((a, b) => b.rating - a.rating);
 
-      // Фильтрация ресторанов по свойству "name"
       const filtered = sortedRestaurants.filter((restaurant) =>
         restaurant.name.toLowerCase().includes(searchName.toLowerCase())
       );

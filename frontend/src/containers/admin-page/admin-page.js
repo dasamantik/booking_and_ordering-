@@ -1112,24 +1112,7 @@ function AdminPage() {
                                     />
                                 </FormControl>
 
-                                {restDataEdit.photos?.map((photo, index) => (
-                                    <div key={photo} className='ingredient__wrappper'>
-                                        <FormControl>
-                                            <InputLabel shrink>{`Photo ${index + 1} Name`}</InputLabel>
-                                            <TextField
-                                                label={`Photo ${index + 1} Name`}
-                                                value={photo}
-                                                onChange={(event) => handlePhotoChangeEdit(event, index)}
-                                                required
-                                            />
-                                        </FormControl>
-                                        <Button onClick={(event) => deletePhotoEdit(event, index)}><FontAwesomeIcon icon={faTrash} /></Button>
-                                    </div>
-                                ))}
-
-                                <Button variant="contained" color="primary" onClick={addPhotoEdit}>
-                                    Add Photo
-                                </Button>
+                                
 
                                 <Button variant="contained" color="primary" onClick={confirmEditRest}>
                                     Change
@@ -1394,27 +1377,11 @@ function AdminPage() {
                                     />
                                 </FormControl>
 
-                                {/* <FormControl>
-                                    <InputLabel shrink>Created At</InputLabel>
-                                    <TextField
-                                        disabled
-                                        value={tableDataEdit.createdAt}
-                                        onChange={(event) => handleInputChangeTableCreate(event, "createdAt")}
-                                        required
-                                    />
-                                </FormControl> */}
+                            
 
                                 {tableDataCreate.tableNumbers?.map((smallTable, index) => (
                                     <div key={smallTable._id} className='ingredient__wrappper'>
-                                        {/* <FormControl>
-                                            <InputLabel shrink>{`Table ${index + 1} Name`}</InputLabel>
-                                            <TextField
-                                                label={`Table ${index + 1} Id`}
-                                                value={smallTable._id}
-                                                onChange={(event) => handleTableChangeTableCreate(event, index, "_id")}
-                                                required
-                                            />
-                                        </FormControl> */}
+                                       
 
                                         <FormControl>
                                             <InputLabel shrink>{`Table ${index + 1} Number`}</InputLabel>

@@ -53,12 +53,7 @@ const LoginForm = () => {
         password: password.value,
       });
 
-      // Read cookies using js-cookie
-    //   const { token } = response.data; // Получите токен из ответа сервера
-
-    // // // Установите токен в куки с помощью js-cookie
-    //   Cookies.set('access_token', token, { expires: 1 });
-
+      
       event.target.reset();
 
       decodeToken(Cookies.get('access_token')).isAdmin ? navigate('/admin') : navigate('/');
